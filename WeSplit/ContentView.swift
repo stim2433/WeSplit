@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var checkAmount = 0.0
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
+    @State private var isOldRelease = true
     
     @FocusState private var amountIsFocused: Bool
     
@@ -54,18 +55,22 @@ struct ContentView: View {
                     
                 }
                 Section("How much do you want to tip") {
-//                    Picker("Tip percentage", selection: $tipPercentage) {
-//                        ForEach(tipPercentages, id: \.self) {
-//                            Text($0, format: .percent)
-//                        }
-//                    }
-//                    .pickerStyle(.segmented)
-                    Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(0..<101) {
-                            Text($0, format: .percent)
+                    Toggle("Show old relise", isOn: $isOldRelease)
+                    if isOldRelease {
+                        Picker("Tip percentage", selection: $tipPercentage) {
+                            ForEach(tipPercentages, id: \.self) {
+                                Text($0, format: .percent)
+                            }
                         }
+                        .pickerStyle(.segmented)
+                    } else {
+                        Picker("Tip percentage", selection: $tipPercentage) {
+                            ForEach(0..<101) {
+                                Text($0, format: .percent)
+                            }
+                        }
+                        .pickerStyle(.navigationLink)
                     }
-                    .pickerStyle(.navigationLink)
                 }
                 
                 Section ("Amount per person"){
