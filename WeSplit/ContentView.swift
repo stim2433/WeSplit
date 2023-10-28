@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
     @State private var isOldRelease = true
+    @State private var isTipPresentege = false
     
     @FocusState private var amountIsFocused: Bool
     
@@ -79,6 +80,7 @@ struct ContentView: View {
                 
                 Section ("Amount total check"){
                     Text(totalPer, format: .currency(code: Locale.current.currency?.identifier ?? "RUB"))
+                        .foregroundColor(tipPercentage == 0 ? .red : .black)
                 }
             }
             .navigationTitle("WeSplit")
